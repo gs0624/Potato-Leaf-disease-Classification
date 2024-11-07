@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potato Leaf Disease Classification</title>
+</head>
+<body>
+    <h1>Upload a Potato Leaf Image</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="fileInput" accept="image/*">
+        <button type="button" onclick="uploadImage()">Classify</button>
+    </form>
+    <p id="result"></p>
+
+    <script>
+        async function uploadImage() {
+            const fileInput = document.getElementById('fileInput').files[0];
+            const formData = new FormData();
+            formData.append('file', fileInput);
+
+            const response = await fetch('http://localhost:8000/predict', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+            document.getElementById('result').textContent = `Disease: ${result.disease}, Confidence: ${result.confidence}`;
+        }
+    </script>
+</body>
+</html>
