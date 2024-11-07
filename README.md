@@ -1,1 +1,1 @@
-# Potato-Leaf-disease-Classification
+# Potato-Leaf-disease-Classification using CNN
